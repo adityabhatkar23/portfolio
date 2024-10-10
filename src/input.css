@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	.nav {@apply
+		 hover:text-white 
+		hover:bg-zinc-700
+		duration-150
+	}
+	.active{
+		@apply text-white bg-zinc-700 
+	}
+	
+
+}
