@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Greenado",
+    "description": "A simple website built to practice and showcase my HTML and Tailwind CSS skills.",
+    "img": "https://images.unsplash.com/photo-1511497584788-876760111969?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZvcmVzdHxlbnwwfHwwfHx8MA%3D%3D",
+    "tags": ["HTML", "Tailwind"],
+    "link": "https://greenado.netlify.app/"
+  },
+  {
+    "id": 2,
+    "name": "Portfolio v1",
+    "description": "My personal portfolio website built with HTML and TailwindCSS, showcasing my work and skills. Animated with GSAP.",
+    "img": "https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHBvcnRmb2xpb3xlbnwwfHwwfHx8MA%3D%3D",
+    "tags": ["HTML", "Tailwind", "JavaScript", "GSAP"],
+    "link": "https://adityabhatkar23.github.io/portfolio/"
+  },
+  {
+    "id": 3,
+    "name": "thoughtShare",
+    "description": "A simple thought sharing app built with Express. Users can register, login, post, edit, delete, and like thoughts. Built to learn basics of Express, Mongoose, EJS, authentication, and more.",
+    "img": "https://images.unsplash.com/photo-1522424427542-e6fc86ff5253?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "tags": [
+      "Express",
+      "JavaScript",
+      "API",
+      "Tailwind",
+      "Node",
+      "Mongoose",
+      "EJS"
+    ],
+    "link": "https://thoughtshare.onrender.com/"
+  }
+]
