@@ -13,4 +13,7 @@
 	.active {
 		@apply text-white bg-neutral-900 px-2 rounded-lg
 	}
+	.dud{
+		@apply text-slate-300
+	}
 }
