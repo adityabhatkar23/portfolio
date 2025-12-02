@@ -1,6 +1,7 @@
 import { skills } from "./skills";
 import { motion } from "motion/react";
 import TextScrambleComponent from "./Text";
+import MiniSnake from "./Game";
 
 const Bento = () => {
   const container = {
@@ -51,7 +52,8 @@ const Bento = () => {
           ease: "easeOut",
         }}
       >
-        <img src="https://images.unsplash.com/photo-1632578810034-0642549a33a2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fHdvbGZ8ZW58MHx8MHx8fDA%3D" />
+        {/* <img src="https://images.unsplash.com/photo-1632578810034-0642549a33a2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fHdvbGZ8ZW58MHx8MHx8fDA%3D" /> */}
+        <MiniSnake/>
       </motion.div>
 
       <motion.div
