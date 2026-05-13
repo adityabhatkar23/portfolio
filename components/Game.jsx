@@ -15,6 +15,43 @@ const getRandomCell = (snake = []) => {
   return newFood;
 };
 
+/** Pure tick: no React state updates (safe if logic is run more than once). */
+function stepSnake(prevSnake, currentDirection, foodPos) {
+  const head = { ...prevSnake[0] };
+
+  switch (currentDirection) {
+    case "UP":
+      head.y = (head.y - 1 + gridSize) % gridSize;
+      break;
+    case "DOWN":
+      head.y = (head.y + 1) % gridSize;
+      break;
+    case "LEFT":
+      head.x = (head.x - 1 + gridSize) % gridSize;
+      break;
+    case "RIGHT":
+      head.x = (head.x + 1) % gridSize;
+      break;
+    default:
+      break;
+  }
+
+  if (prevSnake.some((s) => s.x === head.x && s.y === head.y)) {
+    return { died: true, nextSnake: prevSnake, ate: false, nextFood: foodPos };
+  }
+
+  const newSnake = [head, ...prevSnake];
+  const ate = head.x === foodPos.x && head.y === foodPos.y;
+
+  if (!ate) {
+    newSnake.pop();
+  }
+
+  const nextFood = ate ? getRandomCell(newSnake) : foodPos;
+
+  return { died: false, nextSnake: newSnake, ate, nextFood };
+}
+
 const storage = {
   getItem: (key) => {
     try {
@@ -35,7 +72,7 @@ const storage = {
 };
 
 export default function MiniSnake() {
-  const [gameState, setGameState] = useState("start"); // "start", "playing"
+  const [gameState, setGameState] = useState("start");
   const [snake, setSnake] = useState([
     { x: 7, y: 7 },
     { x: 6, y: 7 },
@@ -57,10 +94,15 @@ export default function MiniSnake() {
   const directionRef = useRef("RIGHT");
   const touchStartRef = useRef(null);
   const foodRef = useRef(food);
+  const snakeRef = useRef(snake);
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     foodRef.current = food;
   }, [food]);
+
+  useEffect(() => {
+    snakeRef.current = snake;
+  }, [snake]);
 
   useEffect(() => {
     const saved = storage.getItem("snakeHighScore");
@@ -88,47 +130,37 @@ export default function MiniSnake() {
 
   const cellKey = (x, y) => `${x}-${y}`;
 
-  // Update moveSnake to use foodRef instead of food directly
   const moveSnake = useCallback(() => {
-    setSnake((prevSnake) => {
-      const head = { ...prevSnake[0] };
-      const currentDirection = directionRef.current;
+    const prev = snakeRef.current;
+    const foodPos = foodRef.current;
+    const { died, nextSnake, ate, nextFood } = stepSnake(
+      prev,
+      directionRef.current,
+      foodPos,
+    );
 
-      switch (currentDirection) {
-        case "UP": head.y = (head.y - 1 + gridSize) % gridSize; break;
-        case "DOWN": head.y = (head.y + 1) % gridSize; break;
-        case "LEFT": head.x = (head.x - 1 + gridSize) % gridSize; break;
-        case "RIGHT": head.x = (head.x + 1) % gridSize; break;
-      }
+    if (died) {
+      setGameState("start");
+      clearInterval(intervalRef.current);
+      return;
+    }
 
-      if (prevSnake.some((s) => s.x === head.x && s.y === head.y)) {
-        setGameState("start");
-        clearInterval(intervalRef.current);
-        return prevSnake;
-      }
-
-      const newSnake = [head, ...prevSnake];
-      const currentFood = foodRef.current;  // ← read from ref, not closure
-
-      if (head.x === currentFood.x && head.y === currentFood.y) {
-        const nextFood = getRandomCell(newSnake);
-        setFood(nextFood);
-        foodRef.current = nextFood;  // ← update ref immediately (don't wait for useEffect)
-        setScore(prev => {
-          const newScore = prev + 1;
-          if (newScore > highScore) {
-            setHighScore(newScore);
-            storage.setItem("snakeHighScore", newScore.toString());
+    setSnake(nextSnake);
+    if (ate) {
+      setFood(nextFood);
+      setScore((s) => {
+        const newScore = s + 1;
+        setHighScore((hs) => {
+          if (newScore > hs) {
+            storage.setItem("snakeHighScore", String(newScore));
+            return newScore;
           }
-          return newScore;
+          return hs;
         });
-      } else {
-        newSnake.pop();
-      }
-
-      return newSnake;
-    });
-  }, [highScore]);
+        return newScore;
+      });
+    }
+  }, []);
   const handleKeyDown = useCallback((e) => {
     if (gameState === "start") {
       if (e.key === " " || e.key === "Enter") {
@@ -217,11 +249,12 @@ export default function MiniSnake() {
       { x: 3, y: 7 },
     ];
 
-    const newFood = getRandomCell(initialSnake);  // ← generate once
+    const newFood = getRandomCell(initialSnake); 
     setFood(newFood);
-    foodRef.current = newFood;  // ← sync the ref immediately
+    foodRef.current = newFood;
 
     setSnake(initialSnake);
+    snakeRef.current = initialSnake;
     setDirection("RIGHT");
     directionRef.current = "RIGHT";
     setGameState("playing");
@@ -265,7 +298,7 @@ export default function MiniSnake() {
   return (
     <div className="flex items-center justify-center">
       <div
-        className="bg-black p-4 rounded-xl text-center mx-auto select-none"
+        className="bg-card p-4 rounded-none text-center mx-auto select-none"
         style={{
           width: `${containerWidth + 32}px`,
            height: `${containerWidth + 80}px`
@@ -273,7 +306,7 @@ export default function MiniSnake() {
         }}
       >
         {/* Score Display */}
-        <div className={`text-white text-sm mb-3 flex justify-between items-center ${gameState === "playing" ? "visible" : "invisible"}`}>
+        <div className={`text-foreground text-sm mb-3 flex justify-between items-center ${gameState === "playing" ? "visible" : "invisible"}`}>
           <span>Score: {score}</span>
           <span>High Score: {highScore}</span>
         </div>
@@ -300,7 +333,7 @@ export default function MiniSnake() {
             return (
               <div
                 key={cellKey(x, y)}
-                className={`rounded-full ${isSnake ? "bg-white" : isFood ? "bg-red-700" : "bg-black"
+                className={`rounded-none ${isSnake ? "bg-game-snake" : isFood ? "bg-game-food" : "bg-game-cell"
                   }`}
                 style={{
                   width: `${cellSize}px`,
@@ -313,16 +346,16 @@ export default function MiniSnake() {
           {/* Start Screen Overlay */}
           {gameState === "start" && (
             <div
-              className="absolute inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center cursor-pointer"
+              className="absolute inset-0 bg-background/95 flex flex-col items-center justify-center cursor-pointer"
               onClick={handleTouchStart}
             >
-              <div className="text-white text-2xl font-bold mb-3">snake</div>
-              <div className="text-gray-400 text-lg mb-3">
+              <div className="text-foreground text-2xl font-bold mb-3">snake</div>
+              <div className="text-muted-foreground text-lg mb-3">
                 {highScore > 0 ? `Best: ${highScore}` : ""}
               </div>
-              <div className="text-white text-base mb-2">Tap to Start</div>
-              <div className="text-gray-400 text-sm mb-3">or press Space/Enter</div>
-              <div className="text-gray-500 text-xs text-center px-4">
+              <div className="text-foreground text-base mb-2">Tap to Start</div>
+              <div className="text-muted-foreground text-sm mb-3">or press Space/Enter</div>
+              <div className="text-muted-foreground/90 text-xs text-center px-4">
                 {isMobile ? "Swipe to control" : "Use arrow keys"}
               </div>
             </div>
@@ -331,7 +364,7 @@ export default function MiniSnake() {
 
         {/* Mobile Controls Instructions */}
         {gameState === "playing" && (
-          <div className="mt-3 text-gray-400 text-xs text-center">
+          <div className="mt-3 text-muted-foreground text-xs text-center">
             {isMobile ? "Swipe to change direction" : "Use arrow keys to move"}
           </div>
         )}

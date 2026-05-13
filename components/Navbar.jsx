@@ -14,7 +14,7 @@ export default function Navbar() {
   const pathname = usePathname() || "/";
 
   return (
-    <nav className="shadow-2xs shadow-neutral-800 flex items-center justify-between bg-neutral-950 px-3 font-semibold min-w-56 py-1 rounded-xl font-jetbrains-mono tracking-tighter">
+    <nav className="border border-border shadow-sm shadow-black/30 flex items-center justify-between bg-card px-3 font-semibold min-w-56 py-1 rounded-none font-jetbrains-mono tracking-tighter text-nav-foreground">
       <Link href="/" className={navClass(pathname, "/", true)}>
         Home
       </Link>

@@ -8,29 +8,29 @@ const ProjectCard = ({ img, name, description, tags, link }) => {
     <div className="flex gap-2 md:gap-4 flex-col md:flex-row">
       {/* Thumbnail */}
       <motion.div
-        className="shadow-neutral-800 shadow w-80 lg:w-96"
+        className="border border-border shadow-sm shadow-black/25 w-80 lg:w-96"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, duration: 0.3, ease: "easeOut" }}
       >
-        <img src={img} alt={name} className="object-cover rounded-lg h-full" />
+        <img src={img} alt={name} className="object-cover rounded-none h-full" />
       </motion.div>
 
       {/* Content */}
       <div className="content flex flex-col justify-between gap-2 md:gap-4 w-80 lg:w-96">
         <motion.div
-          className="shadow-neutral-800 shadow bg-zinc-950 rounded-lg p-4 h-full"
+          className="border border-border shadow-sm shadow-black/25 bg-card rounded-none p-4 h-full"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.3, ease: "easeOut" }}
         >
           <h1 className="font-bold text-2xl mb-2">{name}</h1>
-          <p className="text-xs text-zinc-400">{description}</p>
+          <p className="text-xs text-muted-foreground">{description}</p>
           <div className="tags mt-2 flex gap-1 flex-wrap">
             {tags?.map((tag, idx) => (
               <span
                 key={idx}
-                className="bg-zinc-700 rounded-full px-2 py-0.5 text-xs font-semibold"
+                className="bg-secondary border border-border-muted rounded-none px-2 py-0.5 text-xs font-semibold text-secondary-foreground"
               >
                 {tag}
               </span>
@@ -40,7 +40,7 @@ const ProjectCard = ({ img, name, description, tags, link }) => {
 
         <motion.a
           href={link}
-          className="link shadow-neutral-800 shadow bg-neutral-950 rounded-lg p-3 flex justify-center"
+          className="link border border-border shadow-sm shadow-black/25 bg-card rounded-none p-3 flex justify-center hover:bg-secondary transition-colors"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, x: 30 }}

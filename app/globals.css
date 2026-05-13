@@ -1,21 +1,88 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
 @theme {
-	--font-sans: var(--font-dm-serif), ui-serif, serif;
-	--font-serif: var(--font-dm-serif), ui-serif, serif;
-	--font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
-	--font-jetbrains-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+    --font-sans: var(--font-dm-serif), ui-serif, serif;
+    --font-serif: var(--font-dm-serif), ui-serif, serif;
+    --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+    --font-jetbrains-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+    /* Page - The Void */
+    --color-background: #000000;
+    --color-foreground: #ffffff;
+
+    /* Surfaces - Obsidian */
+    --color-card: #090909;
+    --color-card-foreground: #ffffff;
+
+    /* Borders - Hairline contrast */
+    --color-border: #262626;
+    --color-border-muted: #171717;
+
+    /* Primary Accent - Stark White */
+    --color-primary: #ffffff; 
+    --color-primary-foreground: #000000;
+
+    /* Secondary - Neutral Grey */
+    --color-secondary: #171717;
+    --color-secondary-foreground: #a3a3a3;
+
+    /* Muted text - Zinc */
+    --color-muted-foreground: #71717a;
+
+    /* Highlight cards */
+    --color-accent: #ffffff;
+    --color-accent-foreground: #000000;
+
+    /* Deep accent panels */
+    --color-accent-deep: #050505;
+    --color-accent-deep-foreground: #ffffff;
+
+    /* Inline emphasis - Bold Silver */
+    --color-emphasis: #e5e5e5;
+
+    /* Nav */
+    --color-nav-foreground: #a1a1aa;
+
+    /* Inputs */
+    --color-input: #0a0a0a;
+    --color-input-muted: #262626;
+
+    /* Blog / prose */
+    --color-prose-muted: #71717a;
+    --color-link: #ffffff;
+    --color-link-hover: #a3a3a3;
+
+    --color-code-bg: #111111;
+    --color-code-text: #ffffff;
+
+    --color-blockquote-border: #ffffff;
+    --color-blockquote-text: #ffffff;
+
+    /* Mini-game - Grayscale */
+    --color-game-snake: #ffffff;
+    --color-game-food: #525252;
+    --color-game-cell: #71717a;
 }
 
 @layer components {
-	.nav {
-		@apply hover:bg-neutral-900 px-2 rounded-lg duration-150 cursor-pointer
-	}
+    .nav {
+        @apply px-2 py-1 rounded-none duration-150 cursor-pointer text-nav-foreground font-mono text-xs uppercase tracking-widest;
+    }
 
-	.active {
-		@apply text-white bg-neutral-900 px-2 rounded-lg
-	}
-	.dud{
-		@apply text-slate-300
-	}
+    .nav:not(.active):hover {
+        @apply text-foreground bg-secondary;
+    }
+
+    .active {
+        @apply text-primary-foreground bg-primary px-2 py-1 rounded-none font-bold;
+    }
+
+    .active:hover {
+        @apply text-primary-foreground bg-primary/85;
+    }
+
+    .dud {
+        @apply text-muted-foreground opacity-30 select-none;
+    }
 }

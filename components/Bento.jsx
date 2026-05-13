@@ -25,7 +25,7 @@ const Bento = () => {
     <div className="grid sm:grid-cols-12 grid-cols-1 gap-4 min-h-[60vh]">
       {/* About */}
       <motion.div
-        className="shadow-neutral-800 shadow bg-neutral-950 rounded-2xl p-4 sm:col-span-8 sm:row-span-4"
+        className="border border-border shadow-sm shadow-black/25 bg-card rounded-none p-4 sm:col-span-8 sm:row-span-4"
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{
@@ -36,7 +36,7 @@ const Bento = () => {
       >
         <h1 className="font-extrabold text-3xl mb-2">Who am I?</h1>
 
-        <p className="font-semibold text-lg text-neutral-300">
+        <p className="font-semibold text-lg text-secondary-foreground/90">
           Hi! I’m Aditya. I’m a student at VPKBIET, learning how to
           build software.
           <br />
@@ -49,7 +49,7 @@ const Bento = () => {
 
       {/* Snake */}
       <motion.div
-        className="shadow-neutral-800 shadow bg-neutral-950 rounded-2xl overflow-hidden sm:col-span-4 sm:row-span-6 sm:col-start-9"
+        className="border border-border shadow-sm shadow-black/25 bg-card rounded-none overflow-hidden sm:col-span-4 sm:row-span-6 sm:col-start-9"
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -63,7 +63,7 @@ const Bento = () => {
 
       {/* Student Developer */}
       <motion.div
-        className="shadow-slate-800 shadow bg-slate-600 rounded-2xl p-4 flex items-center justify-center sm:col-span-4 sm:row-span-2 sm:row-start-5"
+        className="border border-border-muted shadow-sm shadow-black/20 bg-accent rounded-none p-4 flex items-center justify-center text-accent-foreground sm:col-span-4 sm:row-span-2 sm:row-start-5"
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{
@@ -72,14 +72,14 @@ const Bento = () => {
           ease: "easeOut",
         }}
       >
-        <h1 className="font-bold text-3xl text-center font-jetbrains-mono">
+        <h1 className="font-bold text-3xl text-center font-jetbrains-mono text-accent-foreground">
           “Student & Developer”
         </h1>
       </motion.div>
 
       {/* Intro */}
       <motion.div
-        className="shadow-neutral-800 shadow bg-neutral-950 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 sm:col-span-4 sm:row-span-5 sm:col-start-5 sm:row-start-5"
+        className="border border-border shadow-sm shadow-black/25 bg-card rounded-none p-4 flex flex-col items-center justify-center gap-2 sm:col-span-4 sm:row-span-5 sm:col-start-5 sm:row-start-5"
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{
@@ -96,14 +96,14 @@ const Bento = () => {
           👋🏼
         </motion.h1>
 
-        <h1 className="text-slate-600 text-4xl font-black">
+        <h1 className="text-emphasis text-4xl font-black">
           Aditya
         </h1>
       </motion.div>
 
       {/* Text Scramble */}
       <motion.div
-        className="shadow-slate-800 shadow bg-slate-600 rounded-2xl p-4 flex items-center justify-center overflow-hidden sm:row-span-3 sm:col-start-9 sm:row-start-7 sm:col-span-4"
+        className="border border-border-muted shadow-sm shadow-black/20 bg-accent-deep rounded-none p-4 flex items-center justify-center overflow-hidden sm:row-span-3 sm:col-start-9 sm:row-start-7 sm:col-span-4"
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{
@@ -119,7 +119,7 @@ const Bento = () => {
 
       {/* Tech */}
       <motion.div
-        className="shadow-neutral-800 shadow bg-neutral-950 rounded-2xl p-4 flex flex-col gap-3 sm:col-span-4 
+        className="border border-border shadow-sm shadow-black/25 bg-card rounded-none p-4 flex flex-col gap-3 sm:col-span-4 
         sm:col-span-4 sm:row-span-6 sm:row-start-7"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
@@ -154,7 +154,7 @@ const Bento = () => {
                 <Icon
                   size={48}
                   stroke={1.25}
-                  className="text-neutral-400 grayscale"
+                  className="text-muted-foreground/80 grayscale hover:text-muted-foreground hover:grayscale-0 transition-colors"
                   aria-hidden
                 />
               </motion.a>
@@ -165,7 +165,7 @@ const Bento = () => {
 
       {/* Education */}
       <motion.div
-        className="shadow-neutral-800 shadow bg-neutral-950 rounded-2xl p-4 sm:col-span-8 sm:row-span-3 sm:col-start-5 sm:row-start-10"
+        className="border border-border shadow-sm shadow-black/25 bg-card rounded-none p-4 sm:col-span-8 sm:row-span-3 sm:col-start-5 sm:row-start-10"
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{
@@ -178,12 +178,12 @@ const Bento = () => {
 
         <p className="font-semibold text-lg">
           B.TECH (AI-DS)
-          <span className="text-sm text-neutral-500">
+          <span className="text-sm text-muted-foreground">
             {" "}
             (2023 - Today)
           </span>
 
-          <span className="text-lg text-neutral-300 block mt-2">
+          <span className="text-lg text-secondary-foreground/90 block mt-2">
             Currently Pursuing B.TECH in Artificial Intelligence and
             Data Science from VPKBIET.
           </span>

@@ -87,7 +87,7 @@ export default function TextScrambleComponent() {
 
     const next = () => {
       scrambleRef.current.setText(phrases[counterRef.current]).then(() => {
-        setTimeout(next, 2000); // was 1200ms → now 2000ms
+        setTimeout(next, 2000); 
       });
       counterRef.current = (counterRef.current + 1) % phrases.length;
     };
@@ -100,7 +100,7 @@ export default function TextScrambleComponent() {
       initial={{ opacity: 0.5, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
-      className="text-2xl font-jetbrains-mono font-extralight tracking-tighter text-white text-center"
+      className="text-2xl font-jetbrains-mono font-extralight tracking-tighter text-accent-deep-foreground text-center"
     >
       <span ref={elRef}></span>
     </motion.div>

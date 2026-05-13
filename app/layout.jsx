@@ -10,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${fontSerif.variable} ${fontMono.variable}`}>
-      <body className="bg-black min-h-screen w-full text-white flex flex-col items-center p-10 gap-12 font-serif antialiased">
+      <body className="bg-background min-h-screen w-full text-foreground flex flex-col items-center p-10 gap-12 font-serif antialiased">
         <Navbar />
         <main className="max-w-4xl w-full">{children}</main>
       </body>
