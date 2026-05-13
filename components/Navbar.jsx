@@ -24,6 +24,9 @@ export default function Navbar() {
       <Link href="/contact" className={navClass(pathname, "/contact", false)}>
         Contact
       </Link>
+      <Link href="/blog" className={navClass(pathname, "/blog", false)}>
+        Blog
+      </Link>
     </nav>
   );
 }

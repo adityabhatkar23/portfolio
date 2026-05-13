@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 @import "tailwindcss";
-
+@plugin "@tailwindcss/typography";
 @theme {
-	--font-jetbrains-mono : "JetBrains Mono", monospace;
+	--font-sans: var(--font-dm-serif), ui-serif, serif;
+	--font-serif: var(--font-dm-serif), ui-serif, serif;
+	--font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+	--font-jetbrains-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
 @layer components {

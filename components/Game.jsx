@@ -316,8 +316,8 @@ export default function MiniSnake() {
               className="absolute inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center cursor-pointer"
               onClick={handleTouchStart}
             >
-              <div className="text-white text-2xl font-bold mb-3">🐍 SNAKE</div>
-              <div className="text-green-400 text-lg mb-3">
+              <div className="text-white text-2xl font-bold mb-3">snake</div>
+              <div className="text-gray-400 text-lg mb-3">
                 {highScore > 0 ? `Best: ${highScore}` : ""}
               </div>
               <div className="text-white text-base mb-2">Tap to Start</div>
