@@ -1,23 +1,26 @@
+"use client";
+
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
 
-export const Contact = () => {
+export default function Contact() {
   return (
-    <div className="grid grid-col-2 grid-rows-2 gap-4 mb-4">
+    <div className="mx-auto mb-4 grid w-max max-w-full min-w-0 grid-cols-2 gap-4">
       <motion.div
-        className="shadow-neutral-800 shadow mail bg-neutral-950 rounded-xl w-40 md:w-56 flex justify-center items-center row-start-2  md:row-start-1"
+        className="shadow-neutral-800 shadow mail flex min-h-36 w-40 shrink-0 items-center justify-center justify-self-center rounded-xl bg-neutral-950 py-3 md:min-auto md:w-56 md:justify-self-start row-start-2 md:row-start-1"
+        
         initial={{ opacity: 0, x: -70 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.3, delay: 0.2, ease: "easeOut" }}
       >
         <a
           target="_blank"
+          rel="noreferrer"
           href="mailto:adityabhatkar23@gmail.com"
-          className="px-2 py-1 bg-neutral-700 rounded-lg flex gap-2 items-center justify-center text-center"
+          className="flex items-center justify-center gap-2 rounded-lg bg-neutral-700 px-2 py-1 text-center"
         >
           <FaEnvelope />
-          <span className="text-xs text-center tracking-wider">
+          <span className="text-center text-xs tracking-wider">
             me@aditya.dev
           </span>
         </a>
@@ -31,13 +34,14 @@ export const Contact = () => {
       >
         <a
           target="_blank"
+          rel="noreferrer"
           href="https://github.com/adityabhatkar23/"
           className="text-3xl"
         >
           <FaGithub />
         </a>
-        <h1 className="font-semibold text-xl">Github Profile</h1>
-        <p className="text-sm text-neutral-400 font-medium">
+        <h1 className="text-xl font-semibold">Github Profile</h1>
+        <p className="text-center text-sm font-medium text-neutral-400">
           Find more of my repositories
         </p>
       </motion.div>
@@ -50,6 +54,7 @@ export const Contact = () => {
       >
         <a
           target="_blank"
+          rel="noreferrer"
           href="https://linkedin.com/in/aditya-bhatkar-8555122a3/"
           className="text-4xl"
         >
@@ -58,14 +63,14 @@ export const Contact = () => {
       </motion.div>
 
       <motion.div
-        className="form col-span-2 mt-4 contact-form"
+        className="form contact-form col-span-2 mt-4 w-full min-w-0 md:row-start-3"
         initial={{ opacity: 0, y: 50, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
       >
-        <h1 className="font-bold text-2xl">Contact with me</h1>
+        <h1 className="text-2xl font-bold">Contact with me</h1>
 
-        <p className="text-sm text-neutral-400  font-thin my-2 mb-3 ">
+        <p className="my-2 mb-3 text-sm font-thin text-neutral-400">
           You can also get in touch with me through the form below
         </p>
 
@@ -79,10 +84,10 @@ export const Contact = () => {
             name="access_key"
             value="b1479364-bb59-4330-b8ff-91f224e0600d"
           />
-          <motion.div className="flex-col flex p-2 bg-neutral-950 rounded-lg ">
+          <motion.div className="flex flex-col rounded-lg bg-neutral-950 p-2">
             <label
               htmlFor="name"
-              className="text-[11px] font-medium text-neutral-200 tracking-wider"
+              className="text-[11px] font-medium tracking-wider text-neutral-200"
             >
               Name
             </label>
@@ -90,14 +95,14 @@ export const Contact = () => {
               type="text"
               name="name"
               id="name"
-              className=" outline-none text-xs placeholder:text-xs bg-transparent"
+              className="bg-transparent text-xs outline-none placeholder:text-xs"
               placeholder="Your name"
             />
           </motion.div>
-          <motion.div className="flex-col flex p-2 bg-neutral-950 rounded-lg ">
+          <motion.div className="flex flex-col rounded-lg bg-neutral-950 p-2">
             <label
               htmlFor="email"
-              className="text-[11px] font-medium text-neutral-200 tracking-wider"
+              className="text-[11px] font-medium tracking-wider text-neutral-200"
             >
               Email
             </label>
@@ -105,35 +110,35 @@ export const Contact = () => {
               type="email"
               name="email"
               id="email"
-              className=" outline-none text-xs placeholder:text-xs bg-transparent"
+              className="bg-transparent text-xs outline-none placeholder:text-xs"
               placeholder="example@mail.com"
             />
           </motion.div>
-          <motion.div className="flex-col flex p-2 bg-neutral-950 rounded-lg ">
+          <motion.div className="flex flex-col rounded-lg bg-neutral-950 p-2">
             <label
               htmlFor="message"
-              className="text-[11px] font-medium text-neutral-200 tracking-wider"
+              className="text-[11px] font-medium tracking-wider text-neutral-200"
             >
-              Name
+              Message
             </label>
             <textarea
-              rows="3"
+              rows={3}
               name="message"
               id="message"
-              className=" outline-none text-xs resize-none placeholder:text-xs bg-transparent"
+              className="resize-none bg-transparent text-xs outline-none placeholder:text-xs"
               placeholder="Enter your message here"
-            ></textarea>
+            />
           </motion.div>
 
           <input
             type="submit"
             name="submit"
             id="submit"
-            className="shadow-neutral-950 shadow outline-none text-[13px] font-medium text-center p-2 bg-neutral-700 rounded-lg text-neutral-200 "
+            className="rounded-lg bg-neutral-700 p-2 text-center text-[13px] font-medium text-neutral-200 shadow shadow-neutral-950 outline-none"
             value="Send Message"
           />
         </form>
       </motion.div>
     </div>
   );
-};
+}

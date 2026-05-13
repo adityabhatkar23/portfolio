@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState, useRef, useCallback } from "react";
 
 const gridSize = 15;
@@ -50,13 +52,35 @@ export default function MiniSnake() {
   ]));
   const [direction, setDirection] = useState("RIGHT");
   const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(() => {
-    const saved = storage.getItem("snakeHighScore");
-    return saved ? parseInt(saved, 10) : 0;
-  });
+  const [highScore, setHighScore] = useState(0);
   const intervalRef = useRef(null);
   const directionRef = useRef("RIGHT");
   const touchStartRef = useRef(null);
+  const foodRef = useRef(food);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    foodRef.current = food;
+  }, [food]);
+
+  useEffect(() => {
+    const saved = storage.getItem("snakeHighScore");
+
+    if (saved) {
+      setHighScore(parseInt(saved, 10));
+    }
+
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
   useEffect(() => {
     directionRef.current = direction;
@@ -64,27 +88,19 @@ export default function MiniSnake() {
 
   const cellKey = (x, y) => `${x}-${y}`;
 
+  // Update moveSnake to use foodRef instead of food directly
   const moveSnake = useCallback(() => {
     setSnake((prevSnake) => {
       const head = { ...prevSnake[0] };
       const currentDirection = directionRef.current;
 
       switch (currentDirection) {
-        case "UP":
-          head.y = (head.y - 1 + gridSize) % gridSize;
-          break;
-        case "DOWN":
-          head.y = (head.y + 1) % gridSize;
-          break;
-        case "LEFT":
-          head.x = (head.x - 1 + gridSize) % gridSize;
-          break;
-        case "RIGHT":
-          head.x = (head.x + 1) % gridSize;
-          break;
+        case "UP": head.y = (head.y - 1 + gridSize) % gridSize; break;
+        case "DOWN": head.y = (head.y + 1) % gridSize; break;
+        case "LEFT": head.x = (head.x - 1 + gridSize) % gridSize; break;
+        case "RIGHT": head.x = (head.x + 1) % gridSize; break;
       }
 
-      
       if (prevSnake.some((s) => s.x === head.x && s.y === head.y)) {
         setGameState("start");
         clearInterval(intervalRef.current);
@@ -92,13 +108,14 @@ export default function MiniSnake() {
       }
 
       const newSnake = [head, ...prevSnake];
-      
-      
-      if (head.x === food.x && head.y === food.y) {
-        setFood(getRandomCell(newSnake));
+      const currentFood = foodRef.current;  // ← read from ref, not closure
+
+      if (head.x === currentFood.x && head.y === currentFood.y) {
+        const nextFood = getRandomCell(newSnake);
+        setFood(nextFood);
+        foodRef.current = nextFood;  // ← update ref immediately (don't wait for useEffect)
         setScore(prev => {
           const newScore = prev + 1;
-          // Update high score if needed
           if (newScore > highScore) {
             setHighScore(newScore);
             storage.setItem("snakeHighScore", newScore.toString());
@@ -108,11 +125,10 @@ export default function MiniSnake() {
       } else {
         newSnake.pop();
       }
-      
+
       return newSnake;
     });
-  }, [food, highScore]);
-
+  }, [highScore]);
   const handleKeyDown = useCallback((e) => {
     if (gameState === "start") {
       if (e.key === " " || e.key === "Enter") {
@@ -120,9 +136,9 @@ export default function MiniSnake() {
       }
       return;
     }
-    
+
     if (gameState !== "playing") return;
-    
+
     switch (e.key) {
       case "ArrowUp":
         e.preventDefault();
@@ -148,9 +164,9 @@ export default function MiniSnake() {
       startGame();
       return;
     }
-    
+
     if (gameState !== "playing") return;
-    
+
     e.preventDefault();
     const touch = e.touches[0];
     touchStartRef.current = {
@@ -161,16 +177,16 @@ export default function MiniSnake() {
 
   const handleTouchEnd = (e) => {
     if (gameState !== "playing" || !touchStartRef.current) return;
-    
+
     e.preventDefault();
     const touch = e.changedTouches[0];
     const deltaX = touch.clientX - touchStartRef.current.x;
     const deltaY = touch.clientY - touchStartRef.current.y;
-    
+
     const minSwipeDistance = 30;
-    
+
     if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      
+
       if (Math.abs(deltaX) > minSwipeDistance) {
         if (deltaX > 0 && directionRef.current !== "LEFT") {
           setDirection("RIGHT");
@@ -179,7 +195,7 @@ export default function MiniSnake() {
         }
       }
     } else {
-      
+
       if (Math.abs(deltaY) > minSwipeDistance) {
         if (deltaY > 0 && directionRef.current !== "UP") {
           setDirection("DOWN");
@@ -188,7 +204,7 @@ export default function MiniSnake() {
         }
       }
     }
-    
+
     touchStartRef.current = null;
   };
 
@@ -200,9 +216,12 @@ export default function MiniSnake() {
       { x: 4, y: 7 },
       { x: 3, y: 7 },
     ];
-    
+
+    const newFood = getRandomCell(initialSnake);  // ← generate once
+    setFood(newFood);
+    foodRef.current = newFood;  // ← sync the ref immediately
+
     setSnake(initialSnake);
-    setFood(getRandomCell(initialSnake));
     setDirection("RIGHT");
     directionRef.current = "RIGHT";
     setGameState("playing");
@@ -217,7 +236,7 @@ export default function MiniSnake() {
   useEffect(() => {
     const keyHandler = (e) => handleKeyDown(e);
     document.addEventListener("keydown", keyHandler);
-    
+
     return () => {
       document.removeEventListener("keydown", keyHandler);
       clearInterval(intervalRef.current);
@@ -232,33 +251,33 @@ export default function MiniSnake() {
     } else {
       clearInterval(intervalRef.current);
     }
-    
+
     return () => {
       clearInterval(intervalRef.current);
     };
   }, [gameState, moveSnake]);
 
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
   const cellSize = isMobile ? 20 : 16;
   const gap = isMobile ? 2 : 1;
   const containerWidth = gridSize * cellSize + (gridSize - 1) * gap;
 
   return (
-    <div className="flex items-center justify-cente">
-      <div 
+    <div className="flex items-center justify-center">
+      <div
         className="bg-black p-4 rounded-xl text-center mx-auto select-none"
-        style={{ 
+        style={{
           width: `${containerWidth + 32}px`,
-          maxWidth: '100vw'
+           height: `${containerWidth + 80}px`
+          
         }}
       >
         {/* Score Display */}
-        <div className="text-white text-sm mb-3 flex justify-between items-center">
+        <div className={`text-white text-sm mb-3 flex justify-between items-center ${gameState === "playing" ? "visible" : "invisible"}`}>
           <span>Score: {score}</span>
           <span>High Score: {highScore}</span>
         </div>
-        
+
         {/* Game Grid */}
         <div
           className="mx-auto relative touch-none"
@@ -276,14 +295,13 @@ export default function MiniSnake() {
             const x = i % gridSize;
             const y = Math.floor(i / gridSize);
             const isSnake = snake.some((s) => s.x === x && s.y === y);
-            const isFood = food.x === x && food.y === y;
+            const isFood = gameState === "playing" && food.x === x && food.y === y;
 
             return (
               <div
                 key={cellKey(x, y)}
-                className={`rounded-full ${
-                  isSnake ? "bg-white" : isFood ? "bg-red-700" : "bg-black"
-                }`}
+                className={`rounded-full ${isSnake ? "bg-white" : isFood ? "bg-red-700" : "bg-black"
+                  }`}
                 style={{
                   width: `${cellSize}px`,
                   height: `${cellSize}px`,
@@ -291,10 +309,10 @@ export default function MiniSnake() {
               />
             );
           })}
-          
+
           {/* Start Screen Overlay */}
           {gameState === "start" && (
-            <div 
+            <div
               className="absolute inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center cursor-pointer"
               onClick={handleTouchStart}
             >

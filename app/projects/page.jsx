@@ -1,10 +1,9 @@
-import React from "react";
-import ProjectCard from "../components/ProjectCard";
-import projects from "./projects.json";
+import ProjectCard from "../../components/ProjectCard";
+import projects from "../../data/projects.json";
 
-const Projects = () => {
+export default function ProjectsPage() {
   return (
-    <main className="p-4 flex flex-col gap-6">
+    <div className="p-4 flex flex-col gap-6">
       {[...projects]
         .reverse()
         .map((project) => (
@@ -17,8 +16,6 @@ const Projects = () => {
             link={project.link}
           />
         ))}
-    </main>
+    </div>
   );
-};
-
-export default Projects;
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import { RiLink } from "react-icons/ri";
 import { motion } from "motion/react";
 
