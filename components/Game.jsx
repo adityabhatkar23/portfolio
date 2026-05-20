@@ -346,7 +346,7 @@ export default function MiniSnake() {
           {/* Start Screen Overlay */}
           {gameState === "start" && (
             <div
-              className="absolute inset-0 bg-background/95 flex flex-col items-center justify-center cursor-pointer"
+              className="absolute inset-0 bg-background/70 flex flex-col items-center justify-center cursor-pointer"
               onClick={handleTouchStart}
             >
               <div className="text-foreground text-2xl font-bold mb-3">snake</div>

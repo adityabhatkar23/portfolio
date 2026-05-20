@@ -7,48 +7,36 @@
     --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
     --font-jetbrains-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
-    /* Page - The Void */
     --color-background: #000000;
     --color-foreground: #ffffff;
 
-    /* Surfaces - Obsidian */
     --color-card: #090909;
     --color-card-foreground: #ffffff;
 
-    /* Borders - Hairline contrast */
     --color-border: #262626;
     --color-border-muted: #171717;
 
-    /* Primary Accent - Stark White */
     --color-primary: #ffffff; 
     --color-primary-foreground: #000000;
 
-    /* Secondary - Neutral Grey */
     --color-secondary: #171717;
     --color-secondary-foreground: #a3a3a3;
 
-    /* Muted text - Zinc */
     --color-muted-foreground: #71717a;
 
-    /* Highlight cards */
     --color-accent: #ffffff;
     --color-accent-foreground: #000000;
 
-    /* Deep accent panels */
     --color-accent-deep: #050505;
     --color-accent-deep-foreground: #ffffff;
 
-    /* Inline emphasis - Bold Silver */
     --color-emphasis: #e5e5e5;
 
-    /* Nav */
     --color-nav-foreground: #a1a1aa;
 
-    /* Inputs */
-    --color-input: #0a0a0a;
+    --color-input: #fff;
     --color-input-muted: #262626;
 
-    /* Blog / prose */
     --color-prose-muted: #71717a;
     --color-link: #ffffff;
     --color-link-hover: #a3a3a3;
@@ -62,7 +50,7 @@
     /* Mini-game - Grayscale */
     --color-game-snake: #ffffff;
     --color-game-food: #525252;
-    --color-game-cell: #71717a;
+    --color-game-cell: #141414;
 }
 
 @layer components {
