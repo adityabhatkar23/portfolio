@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 
 export default function Contact() {
   return (
-    <div className="mx-auto mb-4 grid w-max max-w-full min-w-0 grid-cols-2 gap-4">
+    <div className="mx-auto mb-4 grid w-max max-w-full min-w-0 grid-cols-2 gap-2">
       <motion.div
         className="border border-border shadow-sm shadow-black/25 mail flex min-h-36 w-40 shrink-0 items-center justify-center justify-self-center rounded-none bg-card py-3 md:min-auto md:w-56 md:justify-self-start row-start-2 md:row-start-1"
         

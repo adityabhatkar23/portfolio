@@ -1,34 +1,89 @@
 [
   {
     "id": 1,
-    "name": "Greenado",
-    "description": "A simple website built to practice and showcase my HTML and Tailwind CSS skills.",
-    "img": "https://images.unsplash.com/photo-1511497584788-876760111969?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZvcmVzdHxlbnwwfHwwfHx8MA%3D%3D",
-    "tags": ["HTML", "Tailwind"],
-    "link": "https://greenado.netlify.app/"
+    "name": "PortfolioV1",
+    "description": "My personal portfolio showcasing projects and experiments with modern UI, animations, and full-stack development.",
+    "tags": ["HTML", "CSS", "JavaScript", "TailwindCSS"],
+    "link": "https://adityabhatkar.vercel.app/",
+    "github": "https://github.com/adityabhatkar23/portfolio"
   },
   {
     "id": 2,
-    "name": "Portfolio v1",
-    "description": "My personal portfolio website built with HTML and TailwindCSS, showcasing my work and skills. Animated with GSAP.",
-    "img": "https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHBvcnRmb2xpb3xlbnwwfHwwfHx8MA%3D%3D",
-    "tags": ["HTML", "Tailwind", "JavaScript", "GSAP"],
-    "link": "https://adityabhatkar23.github.io/portfolio/"
+    "name": "Greenado",
+    "description": "Simple website built to practice frontend design using HTML and TailwindCSS.",
+    "tags": ["HTML", "TailwindCSS"],
+    "link": "https://greenado.netlify.app/",
+    "github": "https://github.com/adityabhatkar23/greenado"
   },
   {
     "id": 3,
-    "name": "thoughtShare",
-    "description": "A simple thought sharing app built with Express. Users can register, login, post, edit, delete, and like thoughts. Built to learn basics of Express, Mongoose, EJS, authentication, and more.",
-    "img": "https://images.unsplash.com/photo-1522424427542-e6fc86ff5253?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "name": "ThoughtShare",
+    "description": "A social platform where users can register, post thoughts, edit, delete, and interact through likes.",
     "tags": [
       "Express",
-      "JavaScript",
-      "API",
-      "Tailwind",
-      "Node",
-      "Mongoose",
+      "Node.js",
+      "MongoDB",
+      "Authentication",
+      "TailwindCSS",
       "EJS"
     ],
-    "link": "https://thoughtshare.onrender.com/"
-  }
+    "link": "https://thoughtshare.onrender.com/",
+    "github": "https://github.com/adityabhatkar23/thoughtShare"
+  },
+  {
+    "id": 4,
+    "name": "Qrious",
+    "description": "Custom QR code generator application that allows users to create, customize, and download QR codes through a simple interface.",
+    "tags": ["React", "JavaScript", "CSS", "TailwindCSS", "Motion"],
+    "link": "https://qrious-aditya.vercel.app/",
+    "github": "https://github.com/adityabhatkar23/Qrious"
+  },
+  {
+    "id": 5,
+    "name": "NASA Dashboard",
+    "description": "Interactive dashboard built with React to explore NASA APIs including APOD, Mars Rover photos, Near-Earth Objects, and EPIC Earth imagery with filtering and date-based search.",
+    "tags": ["React", "TailwindCSS", "NASA API", "Vite"],
+    "link": "https://nasa-aditya.vercel.app",
+    "github": "https://github.com/adityabhatkar23/nasa"
+  },
+  {
+    "id": 6,
+    "name": "PrimeVision",
+    "description": "Streaming-inspired UI project focused on entertainment discovery and responsive interfaces.",
+    "tags": ["React", "TailwindCSS", "API"],
+    "link": "https://primevision-aditya.vercel.app",
+    "github": "https://github.com/adityabhatkar23/primevision"
+  },
+{
+  "id": 7,
+  "name": "QueueWatch",
+  "description": "Telegram bot built for monitoring HPC Slurm jobs, sending real-time status updates, notifications, and logs directly to users.",
+  "tags": ["Python", "Telegram Bot", "Slurm", "HPC"],
+  "link": "",
+  "github": "https://github.com/adityabhatkar23/QueueWatch"
+},
+  {
+    "id": 8,
+    "name": "ANPR",
+    "description": "Automatic Number Plate Recognition project using computer vision techniques.",
+    "tags": ["Python", "OpenCV", "AI", "Computer Vision"],
+    "link": "",
+    "github": "https://github.com/adityabhatkar23/anpr"
+  },
+  {
+    "id": 9,
+    "name": "Video Player",
+    "description": "Custom video player implementation exploring media playback controls and UX.",
+    "tags": ["JavaScript", "Media"],
+    "link": "",
+    "github": "https://github.com/adityabhatkar23/videoplayer"
+  },
+{
+  "id": 10,
+  "name": "Sync Watch",
+  "description": "Local watch party application that allows users to sync and watch their own media files together in real time with shared playback controls.",
+  "tags": ["React", "Node.js", "Socket.io", "Express", "NeonDB"],
+  "link": "https://syncwatch-aditya.vercel.app",
+  "github": "https://github.com/adityabhatkar23/sync-watch"
+}
 ]

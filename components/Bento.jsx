@@ -22,7 +22,7 @@ const Bento = () => {
   };
 
   return (
-    <div className="grid sm:grid-cols-12 grid-cols-1 gap-4 min-h-[60vh]">
+    <div className="grid sm:grid-cols-12 grid-cols-1 gap-2 min-h-[60vh]">
       {/* About */}
       <motion.div
         className="border border-border shadow-sm shadow-black/25 bg-card rounded-none p-4 sm:col-span-8 sm:row-span-4"
@@ -119,8 +119,7 @@ const Bento = () => {
 
       {/* Tech */}
       <motion.div
-        className="border border-border shadow-sm shadow-black/25 bg-card rounded-none p-4 flex flex-col gap-3 sm:col-span-4 
-        sm:col-span-4 sm:row-span-6 sm:row-start-7"
+        className="border border-border shadow-sm shadow-black/25 bg-card rounded-none p-4 flex flex-col gap-3 sm:col-span-4 sm:row-span-6 sm:row-start-7"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{

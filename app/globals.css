@@ -73,4 +73,20 @@
     .dud {
         @apply text-muted-foreground opacity-30 select-none;
     }
+    .grid-seamless {
+          margin-top: -1px;
+          margin-left: -1px;
+        }
+    svg path {
+  transition: stroke-dashoffset 2.5s ease;
+  
+}
+.group img {
+  filter: grayscale(1);
+}
+
+.group:hover img {
+  filter: grayscale(0);
+  transform: scale(1.05);
+}
 }
