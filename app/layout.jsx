@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Script from "next/script";
 import { fontMono, fontSerif } from "../lib/fonts";
 import "./globals.css";
 
@@ -14,6 +15,15 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main className="max-w-4xl w-full">{children}</main>
       </body>
+      <Script id="oneko-loader" strategy="lazyOnload">
+        {`
+    if (window.innerWidth > 768) {
+      const script = document.createElement('script');
+      script.src = '/oneko.js';
+      document.body.appendChild(script);
+    }
+  `}
+      </Script>
     </html>
   );
 }
