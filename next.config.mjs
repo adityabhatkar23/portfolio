@@ -8,6 +8,9 @@ const nextConfig = {
     root: import.meta.dirname,
     pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   },
+   allowedDevOrigins: [
+    "*.backdoor.adityabhatkar.dev"
+  ]
 };
 
 export default withMDX(nextConfig);

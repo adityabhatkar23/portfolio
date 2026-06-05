@@ -7,14 +7,11 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen ">
       <div className="mx-auto max-w-2xl">
-
         <p className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground mb-5 flex items-center gap-2 before:block before:w-4 before:h-px before:bg-muted-foreground">
           writing
         </p>
 
-        <h1 className="text-2xl font-normal text-foreground mb-8">
-          my blog
-        </h1>
+        <h1 className="text-2xl font-normal text-foreground mb-8">my blog</h1>
 
         <hr className="border-border mb-8" />
 
@@ -36,7 +33,6 @@ export default function BlogPage() {
             </article>
           ))}
         </div>
-
       </div>
     </main>
   );
