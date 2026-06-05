@@ -1,0 +1,249 @@
+---
+
+title: "Git Was Basically Magic Until I Learned What Happens During a Commit"
+date: "2026-06-05"
+description: "I used Git every day for years without really understanding what happened after running git commit. Then I finally looked under the hood."
+tags: ["git", "opensource", "developer-tools", "webdev"]
+readingTime: 7
+---
+
+### Git Was Basically Magic Until I Learned What Happens During a Commit
+
+I use Git almost every day.
+
+Whether I'm working on a side project, contributing to open source, experimenting with some random idea at 1AM, or fixing a typo that somehow survived three rounds of review, Git is always somewhere in the workflow.
+
+The funny thing is that for the longest time I had absolutely no idea what Git was actually doing.
+
+I knew the commands.
+
+Everybody knows the commands.
+
+```bash
+git add .
+git commit -m "fix"
+git push
+```
+
+That's enough to get surprisingly far.
+
+In fact, it's enough to get through years of development without ever thinking about what happens after pressing Enter.
+
+And honestly, that's exactly what I did.
+
+Git was one of those tools that felt too important to question. It worked most of the time, and when it didn't, I copied the error message, pasted it into Google, followed whatever Stack Overflow answer looked the least dangerous, and moved on with my life.
+
+It wasn't a great strategy.
+
+But it worked.
+
+Until it didn't.
+
+Eventually I started running into situations where memorized commands weren't enough anymore. Merge conflicts started looking less like minor inconveniences and more like ancient curses. Rebase tutorials somehow made everything more confusing the longer I read them. Detached HEAD sounded like a medical condition. And every time something went wrong, I realized I was interacting with a tool I used every single day without understanding the basics of how it thought.
+
+So I finally decided to figure out what actually happens when you make a commit.
+
+And the first thing I learned was that Git is way less magical than I imagined.
+
+For some reason I always pictured Git as this giant system constantly tracking every change in every file, maintaining some enormous timeline of everything that had ever happened inside a project.
+
+The reality is much simpler.
+
+Git is basically storing objects.
+
+That's it.
+
+Everything eventually comes back to a handful of object types and the relationships between them. Once I understood that, a lot of Git's behavior suddenly stopped feeling random.
+
+## Git Is Already Saving Things Before You Commit
+
+One thing that surprised me almost immediately was learning what happens when you run `git add`.
+
+I always treated it like a preparation step. You make changes, run `git add`, and Git gets ready for the commit.
+
+That explanation is technically correct.
+
+But it skips the interesting part.
+
+Imagine creating a simple file:
+
+```bash
+echo "Hello World" > app.txt
+git add app.txt
+```
+
+I always assumed Git was simply marking the file as ready for a future commit.
+
+What I didn't realize was that Git is already storing information behind the scenes.
+
+The contents of that file are converted into an object and placed inside the `.git` directory long before a commit exists. In other words, Git starts saving information earlier than most people realize.
+
+That completely changed how I thought about the staging area.
+
+## The Staging Area Finally Made Sense
+
+For years I viewed the staging area as a waiting room where files sat around until they were finally allowed into a commit.
+
+But it's actually closer to a blueprint.
+
+You're not just collecting files. You're building the exact snapshot you want Git to remember.
+
+```text
+Working Directory
+        ↓
+     git add
+        ↓
+ Staging Area
+        ↓
+   git commit
+        ↓
+   Repository
+```
+
+That's why you can stage some changes and leave others out.
+
+That's why you can carefully craft a commit instead of throwing every modified file into it.
+
+You're telling Git exactly what version of the project should be preserved in the next snapshot.
+
+Once I started thinking about it that way, the staging area finally stopped feeling weird.
+
+## Commits Are Snapshots, Not Change Logs
+
+Then came the part that surprised me the most.
+
+Commits don't really work the way I assumed they did.
+
+I always imagined a commit as a list of changes.
+
+Something like:
+
+> Line 42 was modified.
+
+> This function was added.
+
+> This file was deleted.
+
+That's how I mentally visualized Git history.
+
+But Git isn't primarily thinking in terms of changes.
+
+It's thinking in terms of snapshots.
+
+Every commit is essentially a picture of what the project looked like at that moment in time. Alongside that snapshot, Git stores information about who created it, when it was created, what message was attached to it, and which commit came before it.
+
+That last detail is what creates history.
+
+Every commit points to a previous commit, which points to another commit, which points to another one, forming a chain that eventually leads back to the very first commit in the repository.
+
+```text
+Commit C
+   ↓
+Commit B
+   ↓
+Commit A
+```
+
+Once I understood that, Git history stopped feeling like some mysterious timeline and started feeling like a linked structure that I could actually visualize.
+
+## Branches Are Just Pointers
+
+The same thing happened when I learned what branches really are.
+
+If you had asked me a few years ago what creating a branch did, I probably would have said something along the lines of "it creates a copy of the project."
+
+Apparently that's not really true.
+
+A branch is surprisingly lightweight. It's basically just a name pointing at a commit.
+
+Something like this:
+
+```text
+main
+  ↓
+Commit C
+```
+
+Now imagine creating a new branch:
+
+```bash
+git branch feature
+```
+
+Internally, Git isn't copying files.
+
+It isn't cloning your project.
+
+It's simply creating another pointer.
+
+```text
+main ────┐
+         ▼
+      Commit C
+         ▲
+feature ─┘
+```
+
+That's why creating branches happens instantly, even in massive repositories.
+
+There's very little work to do.
+
+Once you realize that branches are mostly pointers, a lot of Git's behavior starts making much more sense.
+
+## HEAD Wasn't As Scary As It Sounded
+
+The same applies to HEAD, which was another term I managed to ignore for an embarrassingly long time.
+
+HEAD sounds complicated.
+
+It's really not.
+
+It's basically Git's way of keeping track of where you currently are.
+
+```text
+HEAD → main → Commit C
+```
+
+That's all.
+
+For years I saw error messages mentioning HEAD and immediately assumed I was about to destroy my repository.
+
+After understanding what it actually represents, those same messages became much easier to reason about because I could finally visualize what Git was trying to tell me.
+
+A lot of Git suddenly became less about memorizing commands and more about understanding where various pointers were pointing.
+
+## The More I Learned, The Simpler Git Became
+
+The strange thing is that the deeper I went into Git internals, the less intimidating Git became.
+
+I expected the opposite.
+
+I thought understanding Git would reveal some incredibly complex machinery hidden underneath everything.
+
+Instead, it mostly revealed a collection of surprisingly elegant ideas.
+
+Store content.
+
+Create snapshots.
+
+Connect snapshots together.
+
+Move pointers around.
+
+That's basically the foundation of a tool used by millions of developers every day.
+
+And maybe that's what impressed me the most.
+
+Not that Git is complicated.
+
+But that something so powerful can be built from concepts that are actually pretty simple once you take the time to understand them.
+
+For years Git felt like magic.
+
+Now it feels more like engineering.
+
+And somehow that's a lot cooler.
+
+```bash
+git commit -m "understand git a little better"
+```
